@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Belajar React JS</title>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const container = document.getElementById("root");
+      const root = ReactDOM.createRoot(container);
+
+      function Header({ name }) {
+        return <h1>Belajar React Bareng {name ? name : "WPU"} 🚀</h1>;
+      }
+
+      function Desc() {
+        return <p>Belajar React itu mudah dan menyenangkan hehe.</p>;
+      }
+
+      function StudentName() {
+        const students = [
+          "Hasbi Auzan Fadhilah Abhar",
+          "Nur Afiifah Yudanti",
+          "Aditya Gilang Wiraatmaja",
+          "Salma Asha Kelana S",
+        ];
+
+        return (
+          <ul>
+            {students.map((student) => (
+              <li key={student}>{student}</li>
+            ))}
+          </ul>
+        );
+      }
+
+      function LikeButton() {
+        const [likes, setLikes] = React.useState(0);
+
+        function handleClick() {
+          setLikes(likes + 1);
+        }
+
+        return <button onClick={handleClick}>Like ({likes})</button>;
+      }
+
+      function HomePage() {
+        return (
+          <>
+            <Header />
+            <Desc />
+            <StudentName />
+            <LikeButton />
+          </>
+        );
+      }
+
+      root.render(<HomePage />);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Latihan ReactJS</title>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+      body {
+        height: 100vh;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #root {
+        display: flex;
+        gap: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const container = document.getElementById("root");
+      const root = ReactDOM.createRoot(container);
+
+      function MyCounter({ counter }) {
+        return <span style={{ margin: 20 }}>{counter == 10 || counter < 0 ? 'Done!' : counter}</span>;
+      }
+
+      function HomePage() {
+        const [counter, setCounter] = React.useState(0);
+
+        function MyBtn({ text, onClick }) {
+          const myStyle =
+            text !== "Reset" ? {} : { margin: 20, display: "block" };
+
+          if (counter == 10 || counter < 0) {
+            return (
+              <button onClick={text == "-" ? decreament : increament} disabled>
+                {text}
+              </button>
+            );
+          } else {
+            return (
+              <button onClick={text == "-" ? decreament : increament}>
+                {text}
+              </button>
+            );
+          }
+        }
+
+        function ResetBtn() {
+          if (counter == 10 || counter < 0) {
+            return <button onClick={reset}>Reset</button>;
+          } else {
+            return (
+              <button onClick={reset} disabled>
+                Reset
+              </button>
+            );
+          }
+        }
+
+        function increament() {
+          setCounter(counter + 1);
+        }
+
+        function decreament() {
+          setCounter(counter - 1);
+        }
+
+        function reset() {
+          setCounter(0);
+        }
+
+        return (
+          <>
+            <MyBtn text={"-"} onClick={decreament} counter={counter} />
+            <MyCounter counter={counter} />
+            <MyBtn text={"+"} onClick={increament} counter={counter} />
+            <ResetBtn text={"Reset"} onClick={reset} counter={counter} />
+          </>
+        );
+      }
+
+      root.render(<HomePage />);
+    </script>
+  </body>
+</html>
